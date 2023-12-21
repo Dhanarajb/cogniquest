@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './style.css';
 
 export default function ColorBox() {
-  const [inputvalue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [boxColor, setBoxColor] = useState('white');
   // useEffect(() => {}, []);
 
@@ -14,26 +14,40 @@ export default function ColorBox() {
   //   };
   // }, []);
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const inputText = e.target.value;
     setInputValue(inputText);
 
-    if (inputText.toLowerCase() === 'green') {
-      setBoxColor('green');
-    } else {
-      setBoxColor('white');
-    }
+        // If not a hex code, try to set the color directly
+        const colorName = new window.Option().style.color = inputText;
+        if (colorName) {
+          setBoxColor(colorName);
+        } else {
+          // Reset to white if parsing fails
+          setBoxColor('white');
+        }
+     
   };
+
   return (
     <div>
-      <input type="text" value={inputvalue} onChange={handleChange} />
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        placeholder="Type a color name or hex code (e.g., red, #00ff00)"
+      />
       <div
         style={{
-          width: '100px',
-          height: '100px',
+          width: '300px',
+          height: '300px',
+          borderRadius: '50%',
           backgroundColor: boxColor,
+          marginTop: '10px',
         }}
-      ></div>
+      >
+        {/* Box that changes color based on input */}
+      </div>
     </div>
   );
 }

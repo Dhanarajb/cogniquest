@@ -6,8 +6,9 @@ import ColorBox from './ColorBox';
 export default function App() {
   return (
     <div>
-      <FetchApi />
       <ColorBox />
+      <FetchApi />
+      
     </div>
   );
 }
